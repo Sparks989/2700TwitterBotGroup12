@@ -1,3 +1,18 @@
+// DEBUG
+var debug = false;
+
+// Wordnik stuff
+var WordnikAPIKey = 'o222xzwlqvqzi7mr7xy9jnu9ssdfceg5km0bjl86y34115a93';
+var request = require('request');
+var inflection = require('inflection');
+var pluralize = inflection.pluralize;
+var capitalize = inflection.capitalize;
+var singularize = inflection.singularize;
+var pre;	// store prebuilt strings here.
+
+// Blacklist
+var wordfilter = require('wordfilter');
+
 // Our Twitter library
 var Twit = require('twit');
 
@@ -7,7 +22,7 @@ var T = new Twit(require('./config.js'));
 // This is the URL of a search for the latest tweets on the '#mediaarts' hashtag.
 var mediaArtsSearch = {q: "#mediaarts", count: 10, result_type: "recent"}; 
 
-// This function finds the latest tweet with the #mediaarts hashtag, and retweets it.
+// This function finds the latest teet with the #mediaarts hashtag, and retweets it.
 function retweetLatest() {
 	T.get('search/tweets', mediaArtsSearch, function (error, data) {
 	  // log out any errors and responses
