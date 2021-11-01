@@ -1,0 +1,18 @@
+{
+  "name": "testtwitbot",
+  "version": "1.0.0",
+  "description": "this is a test for twit bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "twit bot"
+  },
+  "keywords": [
+    "twit",
+    "bot"
+  ],
+  "author": "Gerhardt Slawitschka",
+  "license": "ISC",
+  "dependencies": {
+    "twit": "^2.2.11"
+  }
+}
