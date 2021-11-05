@@ -56,28 +56,42 @@ function retweetLatest() {
 	});
 }
 
-
-// Sets up a user stream
-var stream = T.stream('statuses/filter', { track: '@tweets4retweets' });
-console.log("Searching for tweets...");
-stream.on('tweet', tweetEvent);
-
-function tweetEvent(eventMsg) {
-
-	var replyto = everntMsg.in_reply_to_screen_name;
-	var text = eventMsg.text;
-	var from = eventMsg.user.screen_name;
-
-	console.log(replyto + ' ' + from);
-
-	if (replyto === 'tweets4retweets') {
-		var newtweet = '@' + from + ' thanks you for tweeting me!';
-		console.log("The tweetEvent function worked!");
-		console.log(newtweet);
-
+// This function gest the most recent tweet matching a hashtag and returns the text body
+function getText() {
+	T.get('search/tweets', {q: '#climate', count:1, result_type: 'recent'}, function(error,data) {
+	if(error) {
+		console.log('There was an error with getText()')
 	}
+	let tweetStr = JSON.stringify(data.statuses[0].text);
+	});
+	return tweetStr;
+	// DOES NOT RETURN THE TEXT FIELD AS A STRING, ONLY AS UNDEFINED OBJECT
 }
 
+// This function removes the twitter handle and starts right at the first char of the body
+function cleanText(txt) {
+	let cleanText = "";
+	for (let i = 0; i < txt.length; i++) {
+		if (txt[i] == ':') {
+			cleanText = txt.substr(i+2);
+			break;
+		}
+		i++;
+	}
+	return cleanText;
+}
+
+
+function editText(tweetText) {
+	var tweet = new String(tweetText);
+
+	if(Math.random() > 0.5) {
+	  	tweet = tweet + "?";
+	} else {
+		tweet = tweet + "Hello there"
+	}
+	return  tweet;
+}
 
 
 // Function that tweets whatever txt is - Verified Working
@@ -98,6 +112,13 @@ function tweetIt(txt) {
 }
 
 
+var myStr = getText();
+
+console.log(getText());
+console.log(typeof myStr);
+//let tweetString = getText();
+//console.log(tweetString);
+//cleanText(newText);
 // Try to retweet something as soon as we run the program...
 //retweetLatest();
 
@@ -106,3 +127,6 @@ function tweetIt(txt) {
 // ...and then every hour after that. Time here is in milliseconds, so
 // 1000 ms = 1 second, 1 sec * 60 = 1 min, 1 min * 60 = 1 hour --> 1000 * 60 * 60
 setInterval(retweetLatest, 1000 * 60 * 60);
+
+
+console.log("\nFinished running!")
