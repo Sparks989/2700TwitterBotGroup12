@@ -57,28 +57,18 @@ function retweetLatest() {
 }
 
 
-// Sets up a user stream
-var stream = T.stream('statuses/filter', { track: '#tweeks4retweets'});
-
-console.log("Searching for tweets...");
-
-stream.on('tweet', tweetEvent);
-
-function tweetEvent(tweet) {
-
-	var replyto = everntMsg.in_reply_to_screen_name;
-	var text = eventMsg.text;
-	var from = eventMsg.user.screen_name;
-
-	console.log(replyto + ' ' + from);
-
-	if (replyto === 'tweets4retweets') {
-		var newtweet = '@' + from + ' thanks you for tweeting me!';
-		console.log(newtweet);
-	}
+// Get the latest tweet from a community and print it to the terminal
+function getTweet() {
+	T.get('search/tweets', tagSearch, function (error, data) {
+		// log out any errors and responses
+		console.log(error, data);
+  		// If our search request to the server had no errors...
+		if (!error) {
+			var retweetId = data.statuses[0].id_str;
+			console.log(data);
+		}
+	});
 }
-
-
 
 
 
@@ -94,7 +84,7 @@ function tweetIt(txt) {
 		if (err) {
 			console.log("Something went wrong!");
 		} else {
-			console.log("It worked!");
+			console.log("The tweetIt function worked!");
 		}
 	}
 }
@@ -103,7 +93,8 @@ function tweetIt(txt) {
 // Try to retweet something as soon as we run the program...
 //retweetLatest();
 
-tweetIt("DoOoEeS it work??");
+//tweetIt("DoOoEeS it work??");
+getTweet();
 
 // ...and then every hour after that. Time here is in milliseconds, so
 // 1000 ms = 1 second, 1 sec * 60 = 1 min, 1 min * 60 = 1 hour --> 1000 * 60 * 60
