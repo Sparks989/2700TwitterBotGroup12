@@ -53,16 +53,15 @@ function retweetLatest() {
 
 
 
-
+let tweetText = "";
 function editText() {
-	T.get('search/tweets', mediaArtsSearch, function(error,response) {
+	tweetText = T.get('explore/tabs/trending', {count:1}, function(error,response) {
 		if(response) {
 			console.log('It worked!')
 		} else if(error) {
 			console.log('Back to the drawing board.')
 		}
 	});
-	var tweetText = data.statuses[0].text;
 	for(var i = 0; i < tweetText.length; i++){
 	  	if(Math.random() > 0.5){
 	  		tweetText[i] = tweetText[i].toUpperCase;
@@ -71,22 +70,7 @@ function editText() {
 	if(Math.random() > 0.5) {
 	  	tweetText = tweetText + "?";
 	}
-	function tweetIt(tweetText) {
-		var tweet = {
-			status: tweetText
-		}
-
-		T.post('statuses/update', tweet, tweeted);
-
-		function tweeted(err, data, response) {
-			if (err) {
-				console.log("Something went wrong!");
-			} else {
-				console.log("It worked!");
-			}
-		}
-	}
-	  
+	return tweetText;
 }
 
 function tweetIt(txt) {
@@ -104,3 +88,6 @@ function tweetIt(txt) {
 		}
 	}
 }
+
+
+tweetIt(editText());
