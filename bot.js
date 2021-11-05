@@ -55,13 +55,15 @@ function retweetLatest() {
 
 let tweetText = "";
 function editText() {
-	tweetText = T.get('explore/tabs/trending', {count:1}, function(error,response) {
+	T.get('search/tweets', {q: '#climate', count:1, result_type: 'recent'}, function(error,data,response) {
 		if(response) {
-			console.log('It worked!')
+			console.log('Get that bread!')
 		} else if(error) {
 			console.log('Back to the drawing board.')
 		}
+		tweetText = data.statuses[0].text;
 	});
+	console.log(tweetText);
 	for(var i = 0; i < tweetText.length; i++){
 	  	if(Math.random() > 0.5){
 	  		tweetText[i] = tweetText[i].toUpperCase;
@@ -73,6 +75,7 @@ function editText() {
 	return tweetText;
 }
 
+console.log(tweetText);
 function tweetIt(txt) {
 	var tweet = {
 		status: txt
