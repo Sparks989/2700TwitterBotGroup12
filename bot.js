@@ -53,29 +53,34 @@ function retweetLatest() {
 
 
 
-let tweetText = "";
-function editText() {
+
+function getText() {
 	T.get('search/tweets', {q: '#climate', count:1, result_type: 'recent'}, function(error,data,response) {
 		if(response) {
 			console.log('Get that bread!')
 		} else if(error) {
 			console.log('Back to the drawing board.')
 		}
-		tweetText = data.statuses[0].text;
+		let tweetText = data.statuses[0].text;
+		return tweetText;
 	});
-	console.log(tweetText);
-	for(var i = 0; i < tweetText.length; i++){
+}
+
+function editText(tweetText) {
+	var tweet = new String(tweetText);
+	for(var i = 0; i < tweet.length; i++){
 	  	if(Math.random() > 0.5){
-	  		tweetText[i] = tweetText[i].toUpperCase;
+	  		tweet[i] = tweet[i].toUpperCase;
 	  	}
 	}
 	if(Math.random() > 0.5) {
-	  	tweetText = tweetText + "?";
+	  	tweet = tweet + "?";
+	} else {
+		tweet = tweet + "Hello there"
 	}
-	return tweetText;
+	return  tweet;
 }
 
-console.log(tweetText);
 function tweetIt(txt) {
 	var tweet = {
 		status: txt
@@ -93,4 +98,5 @@ function tweetIt(txt) {
 }
 
 
-tweetIt(editText());
+console.log(editText());
+console.log(editText(editText()));
