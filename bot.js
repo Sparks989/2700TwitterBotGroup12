@@ -62,7 +62,7 @@ function getText() {
 			console.log('Back to the drawing board.')
 		}
 		let tweetText = data.statuses[0].text;
-		console.log(tweetText);
+		console.log(typeof tweetText);
 		return tweetText;
 
 	});
