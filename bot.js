@@ -55,20 +55,23 @@ function retweetLatest() {
 
 
 function editText() {
-	T.get('explore/tabs/trending', {count:5}, );
-	  // log out any errors and responses
-	  console.log(error, data);
-	  // If our search request to the server had no errors...
-	  var tweetText = data.statuses[0].text;
-	  for(var i = 0; i < tweetText.length; i++){
+	T.get('search/tweets', mediaArtsSearch, function(error,response) {
+		if(response) {
+			console.log('It worked!')
+		} else if(error) {
+			console.log('Back to the drawing board.')
+		}
+	});
+	var tweetText = data.statuses[0].text;
+	for(var i = 0; i < tweetText.length; i++){
 	  	if(Math.random() > 0.5){
 	  		tweetText[i] = tweetText[i].toUpperCase;
 	  	}
-	  }
-	  if(Math.random() > 0.5) {
+	}
+	if(Math.random() > 0.5) {
 	  	tweetText = tweetText + "?";
-	  }
-	  function tweetIt(tweetText) {
+	}
+	function tweetIt(tweetText) {
 		var tweet = {
 			status: tweetText
 		}
