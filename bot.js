@@ -62,17 +62,19 @@ function getText() {
 			console.log('Back to the drawing board.')
 		}
 		let tweetText = data.statuses[0].text;
+		console.log(tweetText);
 		return tweetText;
+
 	});
 }
 
 function editText(tweetText) {
 	var tweet = new String(tweetText);
-	for(var i = 0; i < tweet.length; i++){
-	  	if(Math.random() > 0.5){
-	  		tweet[i] = tweet[i].toUpperCase;
-	  	}
-	}
+	//for(var i = 0; i < tweet.length; i++){
+	  	//if(Math.random() > 0.5){
+	  		//tweet[i] = tweet[i].toUpperCase;
+	  	//}
+	//}
 	if(Math.random() > 0.5) {
 	  	tweet = tweet + "?";
 	} else {
@@ -98,5 +100,5 @@ function tweetIt(txt) {
 }
 
 
-console.log(editText());
-console.log(editText(editText()));
+//console.log(getText());
+tweetIt(editText(getText()));
