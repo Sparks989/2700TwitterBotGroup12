@@ -49,8 +49,56 @@ function retweetLatest() {
 	});
 }
 
-// Try to retweet something as soon as we run the program...
-retweetLatest();
-// ...and then every hour after that. Time here is in milliseconds, so
-// 1000 ms = 1 second, 1 sec * 60 = 1 min, 1 min * 60 = 1 hour --> 1000 * 60 * 60
-setInterval(retweetLatest, 1000 * 60 * 60);
+// Replies to a top rated tweet with edited text.
+
+
+
+
+function getText() {
+	T.get('search/tweets', {q: '#climate', count:1, result_type: 'recent'}, function(error,data,response) {
+		if(response) {
+			console.log('Get that bread!')
+		} else if(error) {
+			console.log('Back to the drawing board.')
+		}
+		let tweetText = data.statuses[0].text;
+		console.log(typeof tweetText);
+		return tweetText;
+
+	});
+}
+
+function editText(tweetText) {
+	var tweet = new String(tweetText);
+	//for(var i = 0; i < tweet.length; i++){
+	  	//if(Math.random() > 0.5){
+	  		//tweet[i] = tweet[i].toUpperCase;
+	  	//}
+	//}
+	if(Math.random() > 0.5) {
+	  	tweet = tweet + "?";
+	} else {
+		tweet = tweet + "Hello there"
+	}
+	return  tweet;
+}
+
+function tweetIt(txt) {
+	var tweet = {
+		status: txt
+	}
+
+	T.post('statuses/update', tweet, tweeted);
+
+	function tweeted(err, data, response) {
+		if (err) {
+			console.log("Something went wrong!");
+		} else {
+			console.log("It worked!");
+		}
+	}
+}
+
+
+//console.log(getText());
+tweetIt(editText(getText()));
