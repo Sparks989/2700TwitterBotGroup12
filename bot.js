@@ -61,14 +61,12 @@ function getText() {
 		} else if(error) {
 			console.log('Back to the drawing board.')
 		}
-		let tweetText = data.statuses[0].text;
-		console.log(typeof tweetText);
-		return tweetText;
-
+		tweetIt(editText(data.statuses[0].text));
 	});
 }
 
 function editText(tweetText) {
+	console.log(typeof tweetText);
 	var tweet = new String(tweetText);
 	//for(var i = 0; i < tweet.length; i++){
 	  	//if(Math.random() > 0.5){
@@ -100,5 +98,6 @@ function tweetIt(txt) {
 }
 
 
+getText();
 //console.log(getText());
-tweetIt(editText(getText()));
+//tweetIt(editText(getText()));
