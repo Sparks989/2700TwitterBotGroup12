@@ -59,14 +59,16 @@ function retweetLatest() {
 // This function gest the most recent tweet matching a hashtag and returns the text body
 function getText() {
 	T.get('search/tweets', {q: '#climate', count:1, result_type: 'recent'}, function(error,data) {
-	if(error) {
-		console.log('There was an error with getText()')
-	}
-	let tweetStr = JSON.stringify(data.statuses[0].text);
+		// Catch exceptions
+		if(error) {
+			console.log('There was an error with getText()')
+		}
+		console.log(data.statuses);
 	});
-	return tweetStr;
 	// DOES NOT RETURN THE TEXT FIELD AS A STRING, ONLY AS UNDEFINED OBJECT
 }
+
+
 
 // This function removes the twitter handle and starts right at the first char of the body
 function cleanText(txt) {
@@ -112,10 +114,11 @@ function tweetIt(txt) {
 }
 
 
-var myStr = getText();
 
+////var myStr = getText();
 console.log(getText());
-console.log(typeof myStr);
+//console.log(getText());
+//console.log(typeof myStr);
 //let tweetString = getText();
 //console.log(tweetString);
 //cleanText(newText);
