@@ -66,13 +66,12 @@ function getText() {
 }
 
 function editText(tweetText) {
-	console.log(typeof tweetText);
 	var tweet = new String(tweetText);
-	//for(var i = 0; i < tweet.length; i++){
-	  	//if(Math.random() > 0.5){
-	  		//tweet[i] = tweet[i].toUpperCase;
-	  	//}
-	//}
+	for(var i = 0; i < tweet.length; i++){
+	  	if(Math.random() > 0.5){
+	  		tweet[i] = tweet[i].toUpperCase;
+	  	}
+	}
 	if(Math.random() > 0.5) {
 	  	tweet = tweet + "?";
 	} else {
@@ -97,7 +96,5 @@ function tweetIt(txt) {
 	}
 }
 
-
 getText();
-//console.log(getText());
-//tweetIt(editText(getText()));
+setInterval(getText, 1000*60);
