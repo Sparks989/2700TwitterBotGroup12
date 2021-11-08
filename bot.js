@@ -45,7 +45,7 @@ function test() {
 }
 
 // Replies to a popular tweet with edited text.
-function getTweet() {
+function reTweet() {
 	T.get('search/tweets', {q: '#climate', count:1, result_type: 'recent'}, function(error,data,response) {
 		if(response) {
 			console.log('The getTweet() function worked!')
@@ -92,6 +92,8 @@ function tweetIt(txt) {
 //test();
 //getTweet();
 //console.log(editText('helloooooooo'));
-retweetLatest();
+//retweetLatest();
+//tweetIt('Hello world!');
+reTweet();
 // And recycle every hour
 //setInterval(runBot, 1000 * 60 * 60);
