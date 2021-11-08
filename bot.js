@@ -38,6 +38,13 @@ function retweetLatest() {
 }
 
 
+var climateSearch = {q: "#climate", count: 1, result_type: "recent"};
+var politicsSearch = {q: "#politics", count: 1, result_type: "recent"};
+var techSearch = {q: "#tech", count: 1, result_type: "recent"};
+var wildlifeSearch = {q: "#wildlife", count: 1, result_type: "recent"};
+
+var paramList = [climateSearch, politicsSearch, techSearch, wildlifeSearch];
+
 // Function that simply makes sure the code is compling without issue.
 function test() {
 	let Str = 'test';
@@ -46,7 +53,7 @@ function test() {
 
 // Replies to a popular tweet with edited text.
 function reTweet() {
-	T.get('search/tweets', {q: '#climate', count:1, result_type: 'recent'}, function(error,data,response) {
+	T.get('search/tweets',paramList[Math.floor(Math.random()*4)] , function(error,data,response) {
 		if(response) {
 			console.log('The getTweet() function worked!')
 		} else if(error) {
