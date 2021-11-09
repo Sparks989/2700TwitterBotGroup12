@@ -1,18 +1,15 @@
 {
-  "name": "testtwitbot",
+  "name": "LikeRetweetFollowBot",
   "version": "1.0.0",
-  "description": "this is a test for twit bot",
-  "main": "bot.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "twit bot"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "twit",
-    "bot"
-  ],
-  "author": "Gerhardt Slawitschka",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "twit": "^2.2.11"
+    "twitter-lite": "^0.14.0"
   }
 }
