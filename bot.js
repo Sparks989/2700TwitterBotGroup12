@@ -103,4 +103,4 @@ function tweetIt(txt) {
 //tweetIt('Hello world!');
 reTweet();
 // And recycle every hour
-//setInterval(runBot, 1000 * 60 * 60);
+setInterval(reTweet, 1000 * 60);
